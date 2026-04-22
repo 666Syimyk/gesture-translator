@@ -1,5 +1,23 @@
 const CACHE_NAME = "silent-conversation-v1";
-const APP_SHELL = ["/", "/?ui=user", "/manifest.webmanifest", "/favicon.svg"];
+
+function getBasePath() {
+  try {
+    const scope = String(self.registration?.scope ?? "");
+    const pathname = new URL(scope).pathname;
+    return pathname.endsWith("/") ? pathname.slice(0, -1) : pathname;
+  } catch {
+    return "";
+  }
+}
+
+const BASE_PATH = getBasePath();
+const withBase = (path) => `${BASE_PATH}${path}`;
+const APP_SHELL = [
+  withBase("/"),
+  withBase("/?ui=user"),
+  withBase("/manifest.webmanifest"),
+  withBase("/favicon.svg"),
+];
 
 self.addEventListener("install", (event) => {
   event.waitUntil(
@@ -41,7 +59,7 @@ self.addEventListener("fetch", (event) => {
             .catch(() => {});
           return networkResponse;
         })
-        .catch(() => caches.match("/") || Response.error());
+        .catch(() => caches.match(withBase("/")) || Response.error());
     }),
   );
 });
