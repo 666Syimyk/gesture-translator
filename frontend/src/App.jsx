@@ -7198,6 +7198,9 @@ export default function App({ uiMode = "admin" }) {
     { id: "hand", label: t.camera.guideVisionItems.hand, done: cameraGuide.handVisible },
     { id: "fingers", label: t.camera.guideVisionItems.fingers, done: cameraGuide.fingersVisible },
   ];
+  const isGitHubPages =
+    typeof window !== "undefined" &&
+    window.location.hostname.endsWith("github.io");
   const rawSignBridgePrediction =
     gestureBridgePrediction?.label_id && gestureBridgePrediction.label_id !== "none"
       ? {
@@ -7217,7 +7220,9 @@ export default function App({ uiMode = "admin" }) {
       ? (livePrediction ?? signBridgePrediction)
       : livePrediction;
   const activeCameraError =
-    cameraRecognitionLevel === "sign" ? gestureBridgeError : liveError;
+    cameraRecognitionLevel === "sign" && !isGitHubPages
+      ? gestureBridgeError
+      : liveError;
   const signTrackingOk = Boolean(
     gestureBridgePrediction?.debug?.tracking_ok ??
       gestureBridgeStatus?.tracking_ok ??
@@ -7435,7 +7440,7 @@ export default function App({ uiMode = "admin" }) {
           )}
         </div>
 
-        {cameraRecognitionLevel === "sign" && !isUserUi ? (
+        {cameraRecognitionLevel === "sign" && !isUserUi && !isGitHubPages ? (
           <div className="camera-guide-card camera-gesture-debug-card">
             <div className="camera-guide-header">
               <span className="camera-guide-section-title">Gesture bridge</span>
@@ -7905,6 +7910,15 @@ export default function App({ uiMode = "admin" }) {
   }, [showExternalCameraPhraseLibrary, openedPhraseGuideId]);
 
   useEffect(() => {
+    if (isGitHubPages) {
+      if (gestureBridgeLifecycleRef.current) {
+        gestureBridgeLifecycleRef.current = false;
+        stopGestureBridgeSession().catch(() => {});
+        clearGestureBridgeState();
+      }
+      return;
+    }
+
     const shouldRunGestureBridge =
       activeTab === "camera" &&
       cameraRecognitionLevel === "sign" &&
@@ -7923,7 +7937,7 @@ export default function App({ uiMode = "admin" }) {
 
     stopGestureBridgeSession().catch(() => {});
     clearGestureBridgeState();
-  }, [activeTab, cameraRecognitionLevel, cameraStartSignal, clearGestureBridgeState, startGestureBridgeSession, stopGestureBridgeSession]);
+  }, [activeTab, cameraRecognitionLevel, cameraStartSignal, clearGestureBridgeState, isGitHubPages, startGestureBridgeSession, stopGestureBridgeSession]);
 
   useEffect(() => {
     const SpeechRecognitionApi = getSpeechRecognitionApi();
