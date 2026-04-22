@@ -42,3 +42,10 @@ npm run dev:frontend
 
 Деплой фронтенда на GitHub Pages настроен через GitHub Actions: `.github/workflows/deploy-pages.yml`.
 
+Если GitHub Actions не запускаются (например, из‑за ограничений аккаунта), можно задеплоить вручную в ветку `gh-pages`:
+
+```powershell
+.\scripts\deploy-gh-pages.ps1
+```
+
+После этого в GitHub откройте: `Settings → Pages → Build and deployment → Deploy from a branch` и выберите `gh-pages` + `/(root)`.
