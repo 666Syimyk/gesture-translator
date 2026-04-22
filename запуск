@@ -1,7 +1,0 @@
-cd C:\Users\user\Desktop\gesture-translator\backend
-node index.js
-
-
-cd C:\Users\user\Desktop\gesture-translator\frontend
-npm run dev
-

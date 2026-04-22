@@ -1,4 +1,0 @@
-numpy>=1.26
-opencv-python>=4.10
-mediapipe>=0.10
-torch>=2.2
