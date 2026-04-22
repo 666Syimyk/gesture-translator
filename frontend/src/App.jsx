@@ -7287,7 +7287,34 @@ export default function App({ uiMode = "admin" }) {
     cameraRecognitionLevel !== "alphabet"
       ? (openedPhraseGuide?.aliases?.[0] ?? PHRASE_LABEL_BY_ID[openedPhraseGuideId] ?? "")
       : "";
-  const useNativeMobileShell = isUserUi;
+  const [isNarrowViewport, setIsNarrowViewport] = useState(() => {
+    if (typeof window === "undefined" || typeof window.matchMedia !== "function") {
+      return false;
+    }
+
+    return window.matchMedia("(max-width: 640px)").matches;
+  });
+
+  useEffect(() => {
+    if (typeof window === "undefined" || typeof window.matchMedia !== "function") {
+      return undefined;
+    }
+
+    const mediaQueryList = window.matchMedia("(max-width: 640px)");
+    const handleChange = (event) => setIsNarrowViewport(Boolean(event.matches));
+
+    setIsNarrowViewport(Boolean(mediaQueryList.matches));
+
+    if (typeof mediaQueryList.addEventListener === "function") {
+      mediaQueryList.addEventListener("change", handleChange);
+      return () => mediaQueryList.removeEventListener("change", handleChange);
+    }
+
+    mediaQueryList.addListener(handleChange);
+    return () => mediaQueryList.removeListener(handleChange);
+  }, []);
+
+  const useNativeMobileShell = isUserUi || isNarrowViewport;
 
   function switchUiMode(nextMode) {
     const normalizedMode = nextMode === "user" ? "user" : "admin";
@@ -10315,6 +10342,11 @@ export default function App({ uiMode = "admin" }) {
       <main className={`native-mobile-stage theme-${theme}`}>
         <section className="native-mobile-screen">
           <div className="screen-canvas native-mobile-shell">
+            {!isUserUi ? (
+              <div className="native-mobile-topbar">
+                {renderUiModeSwitch(true)}
+              </div>
+            ) : null}
             {renderScreen()}
             <nav className="bottom-nav" aria-label={locale === "ru" ? "Нижняя навигация" : "Bottom navigation"}>
               {tabs.map((item) => {

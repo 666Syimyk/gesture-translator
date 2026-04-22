@@ -969,12 +969,12 @@ export default function CameraPage({
             }
           />
 
-          <div className="pointer-events-none absolute inset-x-4 bottom-24 rounded-[22px] bg-black/55 p-3 ring-1 ring-white/10">
-            <div className="text-[11px] uppercase tracking-[0.24em] text-slate-300">
+          <div className="camera-live-overlay pointer-events-none absolute inset-x-4 bottom-24 rounded-[22px] bg-black/55 p-3 ring-1 ring-white/10">
+            <div className="camera-overlay-kicker text-[11px] uppercase tracking-[0.24em] text-slate-300">
               {livePreviewTitle}
             </div>
             <div
-              className={`mt-2 font-bold text-white ${
+              className={`camera-overlay-value mt-2 font-bold text-white ${
                 settings.largeTextEnabled ? "text-xl" : "text-lg"
               }`}
             >
@@ -982,12 +982,12 @@ export default function CameraPage({
             </div>
           </div>
 
-          <div className="pointer-events-none absolute inset-x-4 bottom-4 rounded-[26px] bg-slate-950/85 p-4 ring-1 ring-white/10">
-            <div className="text-[11px] uppercase tracking-[0.24em] text-cyan-300/70">
+          <div className="camera-confirm-overlay pointer-events-none absolute inset-x-4 bottom-4 rounded-[26px] bg-slate-950/85 p-4 ring-1 ring-white/10">
+            <div className="camera-overlay-kicker text-[11px] uppercase tracking-[0.24em] text-cyan-300/70">
               {confirmedResultDisplayTitle}
             </div>
             <div
-              className={`mt-2 font-black leading-tight text-white ${
+              className={`camera-overlay-value mt-2 font-black leading-tight text-white ${
                 settings.largeTextEnabled ? "text-4xl" : "text-3xl"
               }`}
             >
