@@ -1,4 +1,4 @@
-const CACHE_NAME = "silent-conversation-v1";
+const CACHE_NAME = "silent-conversation-v2";
 
 function getBasePath() {
   try {
@@ -45,6 +45,22 @@ self.addEventListener("fetch", (event) => {
     return;
   }
 
+  if (request.mode === "navigate") {
+    event.respondWith(
+      fetch(request)
+        .then((networkResponse) => {
+          const responseClone = networkResponse.clone();
+          caches
+            .open(CACHE_NAME)
+            .then((cache) => cache.put(withBase("/"), responseClone))
+            .catch(() => {});
+          return networkResponse;
+        })
+        .catch(() => caches.match(withBase("/")) || Response.error()),
+    );
+    return;
+  }
+
   event.respondWith(
     caches.match(request).then((cachedResponse) => {
       if (cachedResponse) {
@@ -52,6 +68,13 @@ self.addEventListener("fetch", (event) => {
       }
       return fetch(request)
         .then((networkResponse) => {
+          if (
+            request.destination === "document" ||
+            request.headers.get("accept")?.includes("text/html")
+          ) {
+            return networkResponse;
+          }
+
           const responseClone = networkResponse.clone();
           caches
             .open(CACHE_NAME)
