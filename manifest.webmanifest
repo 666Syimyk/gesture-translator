@@ -3,15 +3,15 @@
   "short_name": "SilentTalk",
   "description": "Распознавание жестов в реальном времени",
   "lang": "ru",
-  "start_url": "/?ui=user",
-  "scope": "/",
+  "start_url": "./?ui=user",
+  "scope": "./",
   "display": "standalone",
   "orientation": "portrait",
   "background_color": "#0b1016",
   "theme_color": "#111827",
   "icons": [
     {
-      "src": "/favicon.svg",
+      "src": "./favicon.svg",
       "sizes": "any",
       "type": "image/svg+xml",
       "purpose": "any"
