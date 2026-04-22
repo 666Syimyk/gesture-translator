@@ -1,0 +1,18 @@
+{
+  "watch": [
+    "index.js",
+    "db.js",
+    "data",
+    "scripts",
+    "ml"
+  ],
+  "ignore": [
+    "uploads/**",
+    "ml/artifacts/**",
+    "ml/models/**",
+    "models/**",
+    "**/__pycache__/**",
+    "**/*.pyc"
+  ],
+  "ext": "js,json,py"
+}

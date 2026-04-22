@@ -1,0 +1,45 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "node index.js",
+    "dev:watch": "node --watch index.js",
+    "dev:nodemon": "nodemon index.js",
+    "start": "node index.js",
+    "import:labels": "node scripts/import_label_library.js",
+    "reconcile:landmarks": "node scripts/reconcile_landmark_sequences.js",
+    "rebuild:landmarks": "node scripts/rebuild_landmark_sequences.js",
+    "phrase:record": "python ml/phrase_sequence/record_dataset.py --config ml/phrase_sequence/default_config.json",
+    "phrase:record:train": "python ml/phrase_sequence/record_dataset.py --config ml/phrase_sequence/default_config.json --all-labels --split train --samples 50 --countdown 2",
+    "phrase:record:val": "python ml/phrase_sequence/record_dataset.py --config ml/phrase_sequence/default_config.json --all-labels --split val --samples 10 --countdown 2",
+    "phrase:record:test": "python ml/phrase_sequence/record_dataset.py --config ml/phrase_sequence/default_config.json --all-labels --split test --samples 10 --countdown 2",
+    "phrase:record:privet:train": "python ml/phrase_sequence/record_dataset.py --config ml/phrase_sequence/default_config.json --label hello --split train --samples 50 --countdown 2",
+    "phrase:record:privet:val": "python ml/phrase_sequence/record_dataset.py --config ml/phrase_sequence/default_config.json --label hello --split val --samples 10 --countdown 2",
+    "phrase:record:privet:test": "python ml/phrase_sequence/record_dataset.py --config ml/phrase_sequence/default_config.json --label hello --split test --samples 10 --countdown 2",
+    "phrase:record:dom:train": "python ml/phrase_sequence/record_dataset.py --config ml/phrase_sequence/default_config.json --label Дом --split train --samples 50 --countdown 2",
+    "phrase:record:dom:val": "python ml/phrase_sequence/record_dataset.py --config ml/phrase_sequence/default_config.json --label Дом --split val --samples 10 --countdown 2",
+    "phrase:record:dom:test": "python ml/phrase_sequence/record_dataset.py --config ml/phrase_sequence/default_config.json --label Дом --split test --samples 10 --countdown 2",
+    "phrase:train": "python ml/phrase_sequence/train.py --config ml/phrase_sequence/default_config.json",
+    "phrase:evaluate": "python ml/phrase_sequence/eval.py --config ml/phrase_sequence/default_config.json",
+    "phrase:summary": "python ml/phrase_sequence/dataset_summary.py --config ml/phrase_sequence/default_config.json",
+    "phrase:live": "python ml/phrase_sequence/live_inference.py --config ml/phrase_sequence/default_config.json",
+    "phrase:export": "python ml/phrase_sequence/export_best.py --config ml/phrase_sequence/default_config.json"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "dependencies": {
+    "cors": "^2.8.6",
+    "dotenv": "^17.3.1",
+    "express": "^5.2.1",
+    "multer": "^2.0.2",
+    "pg": "^8.20.0",
+    "ws": "^8.20.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.14"
+  }
+}

@@ -1,0 +1,136 @@
+﻿{
+  "labels": [
+    {
+      "id": "privet",
+      "display_ru": "Привет",
+      "source": "user_canonical",
+      "needs_verification": false,
+      "gesture_type": "dynamic",
+      "verified_common_variant": true,
+      "custom_variant": false,
+      "note": "Открытая ладонь возле головы, лёгкий короткий мах вправо-влево (1 цикл)."
+    },
+    {
+      "id": "poka",
+      "display_ru": "Пока",
+      "source": "user_canonical",
+      "needs_verification": true,
+      "gesture_type": "dynamic",
+      "verified_common_variant": false,
+      "custom_variant": true,
+      "note": "Пользовательский канон: пальцы сгибаются и раскрываются в верхней зоне, без выраженного side-wave."
+    },
+    {
+      "id": "ya",
+      "display_ru": "Я",
+      "source": "user_canonical",
+      "needs_verification": false,
+      "gesture_type": "pointing",
+      "verified_common_variant": true,
+      "custom_variant": false,
+      "note": "Указательный палец на себя; конечная точка на груди."
+    },
+    {
+      "id": "ty",
+      "display_ru": "Ты",
+      "source": "user_canonical",
+      "needs_verification": false,
+      "gesture_type": "pointing",
+      "verified_common_variant": true,
+      "custom_variant": false,
+      "note": "Указательный палец направлен вперёд к собеседнику/в камеру."
+    },
+    {
+      "id": "muzhchina",
+      "display_ru": "Мужчина",
+      "source": "user_canonical",
+      "needs_verification": true,
+      "custom_user_defined": true,
+      "gesture_type": "face_zone",
+      "face_zone_precision_required": true,
+      "requires_temporal_order": false,
+      "verified_common_variant": false,
+      "custom_variant": true,
+      "note": "Пользовательский канон: короткое движение у зоны усов/верхней губы."
+    },
+    {
+      "id": "zhenshchina",
+      "display_ru": "Женщина",
+      "source": "user_canonical",
+      "needs_verification": true,
+      "custom_user_defined": false,
+      "gesture_type": "face_zone",
+      "face_zone_precision_required": true,
+      "requires_temporal_order": true,
+      "verified_common_variant": true,
+      "custom_variant": false,
+      "note": "Движение по щеке/линии челюсти сбоку лица."
+    },
+    {
+      "id": "krasivyy",
+      "display_ru": "Красивый",
+      "source": "user_canonical",
+      "needs_verification": true,
+      "gesture_type": "custom",
+      "verified_common_variant": false,
+      "custom_variant": true,
+      "note": "Использовать пользовательский канон: проход одной рукой вдоль нижней части лица/челюсти."
+    },
+    {
+      "id": "spasibo",
+      "display_ru": "Спасибо",
+      "source": "user_canonical",
+      "needs_verification": true,
+      "custom_user_defined": true,
+      "gesture_type": "face_zone",
+      "face_zone_precision_required": true,
+      "requires_temporal_order": true,
+      "verified_common_variant": false,
+      "custom_variant": true,
+      "note": "Кулак касается подбородка и затем лба; вариант закреплён пользователем для проекта."
+    },
+    {
+      "id": "bolshoy",
+      "display_ru": "Большой",
+      "source": "user_canonical",
+      "needs_verification": false,
+      "gesture_type": "two_hand",
+      "verified_common_variant": true,
+      "custom_variant": false,
+      "note": "Две руки спереди: старт близко, затем расходятся в стороны."
+    },
+    {
+      "id": "malenkiy",
+      "display_ru": "Маленький",
+      "source": "user_canonical",
+      "needs_verification": true,
+      "gesture_type": "custom",
+      "verified_common_variant": false,
+      "custom_variant": true,
+      "note": "Пользовательский канон: одной рукой обозначается небольшая высота/маленький рост."
+    },
+    {
+      "id": "est",
+      "display_ru": "Есть",
+      "source": "user_canonical",
+      "needs_verification": true,
+      "custom_user_defined": true,
+      "gesture_type": "face_zone",
+      "face_zone_precision_required": true,
+      "requires_temporal_order": false,
+      "verified_common_variant": false,
+      "custom_variant": true,
+      "note": "Три пальца (большой+указательный+средний) касаются губ; не заменять альтернативой."
+    },
+    {
+      "id": "none",
+      "display_ru": "none",
+      "source": "user_canonical",
+      "needs_verification": false,
+      "gesture_type": "static",
+      "verified_common_variant": false,
+      "custom_variant": false,
+      "note": "Фоновая метка: валидный жест не распознан."
+    }
+  ]
+}
