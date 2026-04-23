@@ -3,18 +3,31 @@
   "short_name": "SilentTalk",
   "description": "Распознавание жестов в реальном времени",
   "lang": "ru",
-  "start_url": "./?ui=user",
-  "scope": "./",
+  "start_url": "/gesture-translator/?ui=user",
+  "scope": "/gesture-translator/",
   "display": "standalone",
   "orientation": "portrait",
   "background_color": "#0b1016",
   "theme_color": "#111827",
+  "prefer_related_applications": false,
   "icons": [
     {
-      "src": "./favicon.svg",
-      "sizes": "any",
-      "type": "image/svg+xml",
+      "src": "/gesture-translator/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
       "purpose": "any"
+    },
+    {
+      "src": "/gesture-translator/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/gesture-translator/maskable-icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
     }
   ]
 }
