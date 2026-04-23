@@ -35,8 +35,28 @@ jobs:
         run: npm run build
 
       - name: Deploy to gh-pages
-        uses: JamesIves/github-pages-deploy-action@v4
-        with:
-          branch: gh-pages
-          folder: frontend/dist
-          clean: true
+        shell: bash
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+        run: |
+          set -euo pipefail
+
+          DIST_DIR="frontend/dist"
+          if [ ! -d "$DIST_DIR" ]; then
+            echo "Expected '$DIST_DIR' to exist after build."
+            exit 1
+          fi
+
+          touch "$DIST_DIR/.nojekyll"
+
+          pushd "$DIST_DIR" >/dev/null
+          git init
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "Deploy to GitHub Pages"
+          git branch -M gh-pages
+          git remote add origin "https://x-access-token:${GH_TOKEN}@github.com/${REPO}.git"
+          git push -f origin gh-pages
+          popd >/dev/null
