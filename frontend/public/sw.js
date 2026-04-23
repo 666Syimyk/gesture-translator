@@ -1,4 +1,4 @@
-const CACHE_NAME = "silent-conversation-v3";
+const CACHE_NAME = "silent-conversation-v4";
 
 function getBasePath() {
   try {
