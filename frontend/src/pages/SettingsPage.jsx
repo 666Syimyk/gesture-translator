@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { DEFAULT_SETTINGS } from "../api/settingsApi";
+import { getApiBaseUrl, setApiBaseUrl } from "../api/apiClient";
 import {
   cancelSpeech,
   getSpeechVoices,
@@ -87,6 +88,8 @@ export default function SettingsPage({
     isSpeechSynthesisSupported() ? getSpeechVoices() : [],
   );
   const [speechStatus, setSpeechStatus] = useState("");
+  const [apiBaseUrlDraft, setApiBaseUrlDraft] = useState(() => getApiBaseUrl());
+  const [apiBaseUrlStatus, setApiBaseUrlStatus] = useState("");
 
   useEffect(() => {
     if (!speechSupported) {
@@ -146,6 +149,19 @@ export default function SettingsPage({
         ? "Тестовая фраза отправлена в озвучку"
         : "Не удалось запустить озвучку",
     );
+  }
+
+  function handleApplyApiBaseUrl() {
+    setApiBaseUrl(apiBaseUrlDraft);
+    setApiBaseUrlStatus("Saved. Reloading…");
+    window.location.reload();
+  }
+
+  function handleClearApiBaseUrl() {
+    setApiBaseUrl("");
+    setApiBaseUrlDraft("");
+    setApiBaseUrlStatus("Cleared. Reloading…");
+    window.location.reload();
   }
 
   return (
@@ -273,6 +289,48 @@ export default function SettingsPage({
           {speechStatus ? (
             <div className="rounded-[18px] border border-white/10 bg-white/5 px-4 py-3 text-sm text-slate-300">
               {speechStatus}
+            </div>
+          ) : null}
+        </div>
+      </GlassCard>
+
+      <GlassCard>
+        <div className="text-sm font-bold text-white">Backend</div>
+        <div className="mt-1 text-sm text-slate-300">
+          GitHub Pages hosts only the frontend. If you see “Request failed”, set the backend URL (must be HTTPS on mobile).
+        </div>
+
+        <div className="mt-4 grid gap-3">
+          <label className="grid gap-2">
+            <span className="text-sm font-semibold text-slate-200">API base URL</span>
+            <input
+              value={apiBaseUrlDraft}
+              onChange={(event) => setApiBaseUrlDraft(event.target.value)}
+              placeholder="https://your-backend.example.com"
+              className="w-full rounded-[14px] border border-white/10 bg-black/20 px-4 py-3 text-sm text-slate-100 outline-none placeholder:text-slate-500 focus:border-cyan-400/40"
+              inputMode="url"
+              autoCapitalize="none"
+              autoCorrect="off"
+              spellCheck={false}
+            />
+          </label>
+
+          <div className="grid grid-cols-2 gap-3">
+            <PrimaryButton onClick={handleApplyApiBaseUrl} className="w-full">
+              Save & reload
+            </PrimaryButton>
+            <button
+              type="button"
+              onClick={handleClearApiBaseUrl}
+              className="w-full rounded-[18px] border border-white/10 bg-white/5 px-4 py-3 text-sm font-bold text-slate-200 hover:bg-white/10"
+            >
+              Clear
+            </button>
+          </div>
+
+          {apiBaseUrlStatus ? (
+            <div className="rounded-[18px] bg-black/20 px-4 py-3 text-sm text-slate-300">
+              {apiBaseUrlStatus}
             </div>
           ) : null}
         </div>
